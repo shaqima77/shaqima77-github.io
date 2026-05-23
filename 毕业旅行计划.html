@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>18天毕业旅行计划 - 西安→东南沿海→西安</title>
+<style>
+  :root {
+    --primary: #1a237e;
+    --primary-light: #3949ab;
+    --gold: #f0a500;
+    --gold-light: #fff8e1;
+    --bg: #f5f7fb;
+    --card-bg: #ffffff;
+    --text: #2c3e50;
+    --text-light: #6b7c93;
+    --border: #e8ecf2;
+    --shadow: 0 2px 12px rgba(0,0,0,0.06);
+    --shadow-hover: 0 4px 20px rgba(26,35,126,0.12);
+    --blue: #1a73e8;
+    --pink: #e91e63;
+    --cyan: #00bcd4;
+    --purple: #7c4dff;
+    --gray: #78909c;
+    --green: #2e7d32;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Hiragino Sans GB", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== Nav ===== */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(26,35,126,0.97); backdrop-filter: blur(10px);
+    padding: 0 24px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.15);
+  }
+  nav .nav-inner {
+    max-width: 1300px; margin: 0 auto;
+    display: flex; align-items: center; gap: 8px;
+    overflow-x: auto; white-space: nowrap;
+    padding: 12px 0;
+  }
+  nav a {
+    color: rgba(255,255,255,0.82); text-decoration: none;
+    font-size: 14px; padding: 6px 14px; border-radius: 20px;
+    transition: all 0.2s; flex-shrink: 0;
+  }
+  nav a:hover, nav a.active { background: rgba(255,255,255,0.16); color: #fff; }
+
+  /* ===== Container ===== */
+  .container { max-width: 1300px; margin: 0 auto; padding: 0 24px; }
+
+  /* ===== Hero ===== */
+  .hero {
+    background: linear-gradient(135deg, #1a237e 0%, #283593 30%, #3949ab 60%, #1a237e 100%);
+    color: #fff; padding: 72px 24px 56px; text-align: center;
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; top: -80px; right: -80px;
+    width: 320px; height: 320px; border-radius: 50%;
+    background: rgba(240,165,0,0.08);
+  }
+  .hero::after {
+    content: ''; position: absolute; bottom: -60px; left: -40px;
+    width: 240px; height: 240px; border-radius: 50%;
+    background: rgba(255,255,255,0.04);
+  }
+  .hero h1 { font-size: 42px; font-weight: 800; letter-spacing: 2px; position: relative; }
+  .hero .subtitle {
+    font-size: 17px; color: rgba(255,255,255,0.8); margin-top: 12px;
+    position: relative;
+  }
+  .hero .subtitle .dot { color: var(--gold); margin: 0 8px; }
+  .stats { 
+    display: flex; justify-content: center; gap: 48px; margin-top: 40px;
+    position: relative; flex-wrap: wrap;
+  }
+  .stat { text-align: center; }
+  .stat .num { font-size: 48px; font-weight: 800; color: var(--gold); }
+  .stat .label { font-size: 14px; color: rgba(255,255,255,0.7); margin-top: 4px; }
+
+  /* ===== Section ===== */
+  section { padding: 56px 0; }
+  .section-title {
+    font-size: 28px; font-weight: 700; color: var(--primary);
+    margin-bottom: 8px; position: relative; padding-bottom: 14px;
+  }
+  .section-title::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 48px; height: 3px; background: var(--gold); border-radius: 2px;
+  }
+  .section-desc { color: var(--text-light); font-size: 15px; margin-bottom: 32px; }
+
+  /* ===== Cards ===== */
+  .card {
+    background: var(--card-bg); border-radius: 14px; padding: 28px;
+    box-shadow: var(--shadow); transition: box-shadow 0.2s;
+  }
+  .card:hover { box-shadow: var(--shadow-hover); }
+
+  /* ===== Phase Cards ===== */
+  .phase-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+  .phase-card {
+    border-radius: 14px; padding: 24px; color: #fff; position: relative; overflow: hidden;
+  }
+  .phase-card::after {
+    content: ''; position: absolute; top: -30px; right: -30px;
+    width: 80px; height: 80px; border-radius: 50%;
+    background: rgba(255,255,255,0.1);
+  }
+  .phase-card.blue   { background: linear-gradient(135deg, #1a73e8, #4285f4); }
+  .phase-card.pink   { background: linear-gradient(135deg, #e91e63, #f06292); }
+  .phase-card.cyan   { background: linear-gradient(135deg, #00838f, #00bcd4); }
+  .phase-card.purple { background: linear-gradient(135deg, #6a1b9a, #7c4dff); }
+  .phase-card.gray   { background: linear-gradient(135deg, #546e7a, #78909c); }
+  .phase-card .phase-label { font-size: 12px; opacity: 0.85; text-transform: uppercase; letter-spacing: 1px; }
+  .phase-card h3 { font-size: 18px; margin: 8px 0 4px; position: relative; }
+  .phase-card .phase-detail { font-size: 13px; opacity: 0.9; position: relative; }
+
+  /* ===== Route Bar ===== */
+  .route-bar {
+    display: flex; height: 36px; border-radius: 18px; overflow: hidden;
+    margin-bottom: 28px;
+  }
+  .route-bar .seg { display: flex; align-items: center; justify-content: center; color: #fff; font-size: 12px; font-weight: 600; }
+  .route-bar .seg.s1 { background: #1a73e8; flex: 2; }
+  .route-bar .seg.s2 { background: #e91e63; flex: 1; }
+  .route-bar .seg.s3 { background: #00bcd4; flex: 1.5; }
+  .route-bar .seg.s4 { background: #7c4dff; flex: 1.8; }
+  .route-bar .seg.s5 { background: #78909c; flex: 0.7; }
+
+  /* ===== Table ===== */
+  .table-wrap { overflow-x: auto; border-radius: 12px; box-shadow: var(--shadow); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 1100px; }
+  thead th {
+    background: var(--primary); color: #fff; padding: 12px 8px;
+    font-weight: 600; text-align: center; position: sticky; top: 0;
+  }
+  tbody td { padding: 10px 8px; text-align: center; border-bottom: 1px solid var(--border); }
+  tbody tr:nth-child(even) { background: #f8f9fc; }
+  tbody tr:hover { background: #eef1f8; }
+  .row-hotel { background: #fffdf5 !important; }
+  .row-hotel td { border-bottom-color: #f0e5b8; }
+  .row-total { font-weight: 700; background: #e8eaf6 !important; }
+  .row-total td { border-top: 2px solid var(--primary); }
+  .highlight-num { font-weight: 700; color: var(--primary); }
+
+  /* ===== Two Column ===== */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  @media (max-width: 900px) { .two-col { grid-template-columns: 1fr; } }
+
+  /* ===== Bar Chart (CSS) ===== */
+  .bar-chart { display: flex; align-items: flex-end; gap: 20px; height: 280px; padding: 0 8px; }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+  .bar-val { font-size: 12px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+  .bar-fill {
+    width: 100%; max-width: 64px; border-radius: 8px 8px 0 0;
+    transition: height 0.6s ease;
+    min-height: 4px; background: var(--primary);
+  }
+  .bar-fill.c1 { background: linear-gradient(180deg, #5c6bc0, #1a237e); }
+  .bar-fill.c2 { background: linear-gradient(180deg, #ff8a65, #e64a19); }
+  .bar-fill.c3 { background: linear-gradient(180deg, #81c784, #2e7d32); }
+  .bar-fill.c4 { background: linear-gradient(180deg, #ffb74d, #f57c00); }
+  .bar-fill.c5 { background: linear-gradient(180deg, #90a4ae, #546e7a); }
+  .bar-label { font-size: 12px; color: var(--text-light); margin-top: 10px; text-align: center; }
+
+  /* ===== Pie Chart (CSS) ===== */
+  .pie-chart {
+    width: 220px; height: 220px; border-radius: 50%;
+    margin: 0 auto 20px;
+    background: conic-gradient(
+      #1a237e 0deg 186deg,
+      #e64a19 186deg 244deg,
+      #2e7d32 244deg 285deg,
+      #f57c00 285deg 347deg,
+      #78909c 347deg 360deg
+    );
+    position: relative;
+  }
+  .pie-chart::after {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 120px; height: 120px; border-radius: 50%; background: #fff;
+  }
+  .pie-legend { max-width: 320px; margin: 0 auto; }
+  .pie-legend .item { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; }
+  .pie-legend .dot { width: 14px; height: 14px; border-radius: 4px; flex-shrink: 0; }
+  .pie-legend .val { margin-left: auto; font-weight: 600; color: var(--primary); }
+
+  /* ===== Strategy Cards ===== */
+  .strat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+  .strat-card {
+    background: var(--card-bg); border-radius: 14px; padding: 28px;
+    border-left: 4px solid var(--primary); box-shadow: var(--shadow);
+  }
+  .strat-card h3 { font-size: 17px; color: var(--primary); margin-bottom: 12px; }
+  .strat-card p { font-size: 14px; color: var(--text-light); line-height: 1.8; }
+  .strat-card .icon-circle {
+    width: 44px; height: 44px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; margin-bottom: 14px;
+  }
+  .strat-card:nth-child(1) .icon-circle { background: #e8eaf6; }
+  .strat-card:nth-child(2) .icon-circle { background: #fff3e0; }
+  .strat-card:nth-child(3) .icon-circle { background: #e8f5e9; }
+
+  /* ===== Safety ===== */
+  .safety-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+  .safety-card {
+    background: #e8f5e9; border-radius: 14px; padding: 24px;
+    border: 1px solid #c8e6c9;
+  }
+  .safety-card h4 { font-size: 16px; color: var(--green); margin-bottom: 10px; }
+  .safety-card p { font-size: 14px; color: #4a6b4a; line-height: 1.7; }
+
+  /* ===== Accordion ===== */
+  .accordion { display: flex; flex-direction: column; gap: 12px; }
+  .acc-item { background: var(--card-bg); border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+  .acc-head {
+    padding: 18px 24px; cursor: pointer; display: flex; align-items: center;
+    justify-content: space-between; font-size: 16px; font-weight: 600;
+    color: var(--primary); user-select: none; transition: background 0.2s;
+  }
+  .acc-head:hover { background: #f5f7fb; }
+  .acc-head .arrow { transition: transform 0.3s; font-size: 12px; color: var(--text-light); }
+  .acc-body { max-height: 0; overflow: hidden; transition: max-height 0.4s ease, padding 0.3s; }
+  .acc-body-inner { padding: 0 24px 20px; }
+  .acc-check { display: none; }
+  .acc-check:checked + .acc-head .arrow { transform: rotate(180deg); }
+  .acc-check:checked ~ .acc-body { max-height: 2000px; }
+  .checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 8px; }
+  .checklist li { font-size: 14px; color: var(--text-light); list-style: none; padding: 4px 0; }
+  .checklist li::before { content: '☐ '; color: var(--primary); font-weight: 700; margin-right: 6px; }
+
+  /* ===== Footer ===== */
+  footer {
+    background: var(--primary); color: rgba(255,255,255,0.75);
+    text-align: center; padding: 40px 24px; font-size: 14px;
+  }
+  footer .endline { font-size: 18px; color: var(--gold); margin-bottom: 8px; }
+
+  /* ===== Print ===== */
+  @media print {
+    nav { display: none; }
+    body { background: #fff; }
+    .hero { padding: 24px; }
+    .card, .phase-card, .strat-card, .safety-card { box-shadow: none; break-inside: avoid; }
+    .acc-check:not(:checked) ~ .acc-body { max-height: none !important; }
+    section { padding: 24px 0; }
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .hero h1 { font-size: 28px; }
+    .stats { gap: 24px; }
+    .stat .num { font-size: 32px; }
+    .two-col { grid-template-columns: 1fr; }
+    .bar-chart { gap: 10px; height: 200px; }
+    .phase-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Nav ===== -->
+<nav>
+  <div class="nav-inner">
+    <a href="#hero">首页</a>
+    <a href="#overview">行程总览</a>
+    <a href="#itinerary">每日行程</a>
+    <a href="#cost">费用分析</a>
+    <a href="#stay">住宿方案</a>
+    <a href="#charging">充电策略</a>
+    <a href="#safety">安全保障</a>
+    <a href="#checklist">准备清单</a>
+  </div>
+</nav>
+
+<!-- ===== Hero ===== -->
+<div class="hero" id="hero">
+  <h1>18天毕业旅行计划</h1>
+  <p class="subtitle">西安 <span class="dot">→</span> 东南沿海 <span class="dot">→</span> 西安 <span class="dot">·</span> 焕新版Model Y标续 <span class="dot">·</span> 2026年6月</p>
+  <div class="stats">
+    <div class="stat"><div class="num">5,079</div><div class="label">总里程（km）</div></div>
+    <div class="stat"><div class="num">¥8,847</div><div class="label">总预算</div></div>
+    <div class="stat"><div class="num">18</div><div class="label">天数</div></div>
+  </div>
+</div>
+
+<!-- ===== Section 2: Route Overview ===== -->
+<section id="overview"><div class="container">
+  <h2 class="section-title">行程总览</h2>
+  <p class="section-desc">5个阶段 · 横跨13座城市 · 全程约5,079公里</p>
+
+  <!-- Route Bar -->
+  <div class="route-bar">
+    <div class="seg s1">D1-D2 内陆南下 1,780km</div>
+    <div class="seg s2">D3-D6 珠三角港澳</div>
+    <div class="seg s3">D7-D11 东南沿海 1,380km</div>
+    <div class="seg s4">D12-D16 返程 1,550km</div>
+    <div class="seg s5">D17-D18</div>
+  </div>
+
+  <div class="phase-grid">
+    <!-- Phase 1 -->
+    <div class="phase-card blue">
+      <div class="phase-label">阶段一</div>
+      <h3>内陆南下 D1-D2</h3>
+      <div class="phase-detail">
+        西安 → 武汉 → 广州<br>
+        1,780km · 两天赶路<br>
+        全程高速，超充覆盖良好
+      </div>
+    </div>
+    <!-- Phase 2 -->
+    <div class="phase-card pink">
+      <div class="phase-label">阶段二</div>
+      <h3>珠三角港澳 D3-D6</h3>
+      <div class="phase-detail">
+        广州 → 深圳 ⇄ 香港<br>
+        深圳 → 珠海 ⇄ 澳门<br>
+        停车过关，轻松游玩
+      </div>
+    </div>
+    <!-- Phase 3 -->
+    <div class="phase-card cyan">
+      <div class="phase-label">阶段三</div>
+      <h3>东南沿海 D7-D11</h3>
+      <div class="phase-detail">
+        珠海 → 厦门 → 福州 → 宁波<br>
+        1,380km · 沈海高速<br>
+        鼓浪屿、三坊七巷、天一阁
+      </div>
+    </div>
+    <!-- Phase 4 -->
+    <div class="phase-card purple">
+      <div class="phase-label">阶段四</div>
+      <h3>返程北上 D12-D16</h3>
+      <div class="phase-detail">
+        宁波 → 南京 → 合肥 → 西安<br>
+        1,550km · 分段返程<br>
+        南京深度游3天后返回
+      </div>
+    </div>
+    <!-- Phase 5 -->
+    <div class="phase-card gray">
+      <div class="phase-label">阶段五</div>
+      <h3>休整机动 D17-D18</h3>
+      <div class="phase-detail">
+        西安休整<br>
+        洗车整理 + 机动备用<br>
+        可补充前面任意一天
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== Section 3: Daily Itinerary ===== -->
+<section id="itinerary"><div class="container">
+  <h2 class="section-title">每日行程详细</h2>
+  <p class="section-desc">完整18天行程表 · 所有费用单位：人民币（元）</p>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>天数</th><th>出发 → 到达</th><th>里程(km)</th><th>驾驶(h)</th><th>住宿</th>
+          <th>高速费</th><th>充电费</th><th>住宿费</th><th>餐饮</th><th>其他</th><th>合计</th><th>备注</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>D1</td><td>西安 → 武汉</td><td>776</td><td>8.6</td><td>车上</td><td>698</td><td>217</td><td>0</td><td>80</td><td>0</td><td class="highlight-num">995</td><td></td></tr>
+        <tr><td>D2</td><td>武汉 → 广州</td><td>1,004</td><td>11.2</td><td>车上</td><td>904</td><td>281</td><td>0</td><td>80</td><td>0</td><td class="highlight-num">1,265</td><td></td></tr>
+        <tr><td>D3</td><td>广州 → 深圳</td><td>121</td><td>1.3</td><td>车上</td><td>109</td><td>34</td><td>0</td><td>80</td><td>0</td><td class="highlight-num">223</td><td>广州早茶+沙面岛后出发</td></tr>
+        <tr class="row-hotel"><td>D4</td><td>深圳 → 香港</td><td>47</td><td>0.5</td><td>酒店</td><td>42</td><td>13</td><td>200</td><td>120</td><td>100</td><td class="highlight-num">475</td><td>福田口岸过关，太平山顶+维港，晚回深圳；香港走一天后休整洗澡</td></tr>
+        <tr><td>D5</td><td>深圳 → 珠海</td><td>77</td><td>0.9</td><td>车上</td><td>69</td><td>22</td><td>0</td><td>80</td><td>0</td><td class="highlight-num">171</td><td>深圳湾公园后出发</td></tr>
+        <tr><td>D6</td><td>珠海 → 澳门</td><td>10</td><td>0.1</td><td>车上</td><td>9</td><td>3</td><td>0</td><td>80</td><td>50</td><td class="highlight-num">142</td><td>拱北口岸过关，大三巴+威尼斯人，晚回珠海；港澳当日往返交通50元</td></tr>
+        <tr class="row-hotel"><td>D7</td><td>珠海 → 厦门</td><td>626</td><td>7.0</td><td>酒店</td><td>563</td><td>175</td><td>200</td><td>80</td><td>0</td><td class="highlight-num">1,018</td><td>全程沈海高速</td></tr>
+        <tr><td>D8</td><td>厦门 → 厦门</td><td>0</td><td>0</td><td>车上</td><td>0</td><td>0</td><td>0</td><td>80</td><td>35</td><td class="highlight-num">115</td><td>鼓浪屿全天（船票35元），中山路夜市</td></tr>
+        <tr><td>D9</td><td>厦门 → 福州</td><td>259</td><td>2.9</td><td>车上</td><td>233</td><td>73</td><td>0</td><td>80</td><td>0</td><td class="highlight-num">386</td><td>上午环岛路+曾厝垵，下午出发</td></tr>
+        <tr class="row-hotel"><td>D10</td><td>福州 → 宁波</td><td>571</td><td>6.3</td><td>酒店</td><td>514</td><td>160</td><td>200</td><td>80</td><td>0</td><td class="highlight-num">954</td><td>全天赶路</td></tr>
+        <tr><td>D11</td><td>宁波 → 宁波</td><td>0</td><td>0</td><td>车上</td><td>0</td><td>0</td><td>0</td><td>80</td><td>30</td><td class="highlight-num">110</td><td>天一阁（门票30元）+东钱湖+老外滩</td></tr>
+        <tr class="row-hotel"><td>D12</td><td>宁波 → 南京</td><td>430</td><td>4.8</td><td>酒店</td><td>387</td><td>120</td><td>200</td><td>80</td><td>0</td><td class="highlight-num">787</td><td>下午到，秦淮河+夫子庙</td></tr>
+        <tr><td>D13</td><td>南京 → 南京</td><td>0</td><td>0</td><td>车上</td><td>0</td><td>0</td><td>0</td><td>80</td><td>70</td><td class="highlight-num">150</td><td>中山陵（免费）+明孝陵（门票70元）+总统府</td></tr>
+        <tr class="row-hotel"><td>D14</td><td>南京 → 南京</td><td>0</td><td>0</td><td>酒店</td><td>0</td><td>0</td><td>200</td><td>80</td><td>0</td><td class="highlight-num">280</td><td>玄武湖（免费）+老门东+先锋书店</td></tr>
+        <tr><td>D15</td><td>南京 → 合肥</td><td>172</td><td>1.9</td><td>车上</td><td>155</td><td>48</td><td>0</td><td>80</td><td>0</td><td class="highlight-num">283</td><td>午饭后出发，合肥充电休整</td></tr>
+        <tr><td>D16</td><td>合肥 → 西安</td><td>986</td><td>11.0</td><td>车上</td><td>887</td><td>276</td><td>0</td><td>80</td><td>0</td><td class="highlight-num">1,243</td><td>全天拉回西安</td></tr>
+        <tr><td>D17</td><td>西安 → 西安</td><td>0</td><td>0</td><td>车上</td><td>0</td><td>0</td><td>0</td><td>80</td><td>0</td><td class="highlight-num">80</td><td>到家休整、洗车整理（家就在西安不住酒店）</td></tr>
+        <tr><td>D18</td><td>西安 → 西安</td><td>0</td><td>0</td><td>车上</td><td>0</td><td>0</td><td>0</td><td>80</td><td>0</td><td class="highlight-num">80</td><td>机动备用日，可补前面任意一天</td></tr>
+        <tr class="row-total">
+          <td><strong>合计</strong></td><td></td>
+          <td><strong>5,079</strong></td><td><strong>56.6</strong></td><td><strong>5晚</strong></td>
+          <td><strong>4,570</strong></td><td><strong>1,422</strong></td><td><strong>1,000</strong></td><td><strong>1,520</strong></td><td><strong>335</strong></td><td><strong>8,847</strong></td><td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div></section>
+
+<!-- ===== Section 4: Cost Analysis ===== -->
+<section id="cost"><div class="container">
+  <h2 class="section-title">费用分析</h2>
+  <p class="section-desc">总预算 ¥8,847 · 5大费用类别明细</p>
+  <div class="two-col">
+    <!-- Left: Table -->
+    <div class="card">
+      <table style="min-width:auto; box-shadow:none; font-size:14px;">
+        <thead><tr><th>费用项目</th><th>金额（元）</th><th>占比</th></tr></thead>
+        <tbody>
+          <tr><td>高速过路费</td><td class="highlight-num">4,570</td><td>51.7%</td></tr>
+          <tr><td>充电费</td><td class="highlight-num">1,422</td><td>16.1%</td></tr>
+          <tr><td>住宿费（5晚）</td><td class="highlight-num">1,000</td><td>11.3%</td></tr>
+          <tr><td>餐饮费</td><td class="highlight-num">1,520</td><td>17.2%</td></tr>
+          <tr><td>其他（门票/交通）</td><td class="highlight-num">335</td><td>3.8%</td></tr>
+          <tr class="row-total"><td><strong>合计</strong></td><td colspan="2"><strong>8,847</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Right: Charts -->
+    <div class="card">
+      <h4 style="margin-bottom:16px; color:var(--primary);">费用对比</h4>
+      <div class="bar-chart">
+        <div class="bar-col"><div class="bar-val">4,570</div><div class="bar-fill c1" style="height:252px;"></div><div class="bar-label">高速费</div></div>
+        <div class="bar-col"><div class="bar-val">1,422</div><div class="bar-fill c2" style="height:78px;"></div><div class="bar-label">充电费</div></div>
+        <div class="bar-col"><div class="bar-val">1,000</div><div class="bar-fill c3" style="height:55px;"></div><div class="bar-label">住宿费</div></div>
+        <div class="bar-col"><div class="bar-val">1,520</div><div class="bar-fill c4" style="height:84px;"></div><div class="bar-label">餐饮</div></div>
+        <div class="bar-col"><div class="bar-val">335</div><div class="bar-fill c5" style="height:18px;"></div><div class="bar-label">其他</div></div>
+      </div>
+    </div>
+  </div>
+  <!-- Pie Chart -->
+  <div class="card" style="margin-top:24px;">
+    <h4 style="margin-bottom:16px; color:var(--primary); text-align:center;">费用占比</h4>
+    <div class="pie-chart"></div>
+    <div class="pie-legend">
+      <div class="item"><span class="dot" style="background:#1a237e;"></span> 高速费 ¥4,570 <span class="val">51.7%</span></div>
+      <div class="item"><span class="dot" style="background:#e64a19;"></span> 充电费 ¥1,422 <span class="val">16.1%</span></div>
+      <div class="item"><span class="dot" style="background:#2e7d32;"></span> 住宿费 ¥1,000 <span class="val">11.3%</span></div>
+      <div class="item"><span class="dot" style="background:#f57c00;"></span> 餐饮费 ¥1,520 <span class="val">17.2%</span></div>
+      <div class="item"><span class="dot" style="background:#78909c;"></span> 其他 ¥335 <span class="val">3.8%</span></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== Section 5: Accommodation ===== -->
+<section id="stay"><div class="container">
+  <h2 class="section-title">住宿方案</h2>
+  <p class="section-desc">特斯拉露营模式 + 经济酒店 · 18天仅5晚住宿 · 节省超过三分之二住宿费</p>
+  <div class="strat-grid">
+    <div class="strat-card">
+      <div class="icon-circle">🚗</div>
+      <h3>特斯拉露营模式</h3>
+      <p>
+        13晚睡车上，焕新版Model Y后排完全放平即为1.8m大床。<br>
+        开启"露营模式"保持恒温通风，全程不耗里程续航（驻车空调每小时约耗电1-2%）。<br>
+        推荐在服务区/超充站过夜，安全且免费。<br>
+        <strong>节省：13晚 × ¥200 = ¥2,600</strong>
+      </p>
+    </div>
+    <div class="strat-card">
+      <div class="icon-circle">🏨</div>
+      <h3>酒店分布（5晚）</h3>
+      <p>
+        D4 深圳（1晚）· 香港游玩后休整洗澡<br>
+        D7 厦门（1晚）· 长途后休整<br>
+        D10 宁波（1晚）· 全天赶路后休整<br>
+        D12 南京（1晚）· 长途后休整<br>
+        D14 南京（1晚）· 停留期间休整<br>
+        <strong>全部按¥200/晚经济型预算</strong>
+      </p>
+    </div>
+    <div class="strat-card">
+      <div class="icon-circle">💰</div>
+      <h3>费用对比</h3>
+      <p>
+        全部住酒店：18晚 × ¥200 = <strong>¥3,600</strong><br>
+        全部露营模式：18晚 × ¥0 = <strong>¥0</strong><br>
+        本方案混合：5晚 × ¥200 = <strong>¥1,000</strong><br><br>
+        相比全住酒店节省 <strong>¥2,600</strong>，均匀分布保障关键休整节点。
+      </p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== Section 6: Charging Strategy ===== -->
+<section id="charging"><div class="container">
+  <h2 class="section-title">充电策略</h2>
+  <p class="section-desc">焕新版Model Y标续 · CLTC续航554km · 高速实际约400-450km · 全程超充覆盖</p>
+  <div class="strat-grid">
+    <div class="strat-card">
+      <div class="icon-circle">⚡</div>
+      <h3>充电规划原则</h3>
+      <p>
+        安全冗余：按400km保守估算，预留20%余量，单段可靠续航 320km。<br>
+        补电节点：每行驶250-300km或电量剩余20-30%时充电。<br>
+        充电区间：日常充至80-90%，长途充至95%即可。<br>
+        全程充电费预估：1,422元（约0.28元/km）。
+      </p>
+    </div>
+    <div class="strat-card">
+      <div class="icon-circle">🗺️</div>
+      <h3>关键路段充电</h3>
+      <p>
+        <strong>西安→广州（1,780km）：</strong>途经十堰、长沙、韶关超充站，每段补能1次。<br>
+        <strong>东南沿海（1,380km）：</strong>沈海高速服务区密集，汕头/厦门/福州/温州超充覆盖良好。<br>
+        <strong>返程（1,550km）：</strong>南京→合肥→信阳→西安，合肥和信阳各补一次。
+      </p>
+    </div>
+    <div class="strat-card">
+      <div class="icon-circle">🔋</div>
+      <h3>节能驾驶技巧</h3>
+      <p>
+        保持车速 100-110km/h（能耗最优区间）。<br>
+        多用能量回收制动，减少机械刹车。<br>
+        空调优先使用座椅/方向盘加热更省电。<br>
+        出发前用车载导航"行程规划"，自动添加超充站点。<br>
+        胎压保持在2.9bar标准值降低滚阻。
+      </p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== Section 7: Safety ===== -->
+<section id="safety"><div class="container">
+  <h2 class="section-title">安全保障</h2>
+  <p class="section-desc">6月出行 · 南方雨季 · 长途驾驶 · 安全第一</p>
+  <div class="safety-grid">
+    <div class="safety-card">
+      <h4>雨季行车安全</h4>
+      <p>行前检查雨刮器、轮胎胎压及排水孔。雨天降低车速、加大车距、开启近光灯和雾灯。遇积水先观察，低速匀速通过，切勿中途停车或猛冲。避免在强雷暴天气中在山区、峡谷停留。</p>
+    </div>
+    <div class="safety-card">
+      <h4>特斯拉Autopilot</h4>
+      <p>高速路段开启Autopilot辅助驾驶，大幅降低驾驶疲劳。但必须保持双手在方向盘上、注意力集中。进出匝道、施工路段、恶劣天气下务必手动接管。Autopilot是辅助而非自动驾驶。</p>
+    </div>
+    <div class="safety-card">
+      <h4>充电应急</h4>
+      <p>随车携带便携式充电器（220V家用插座可用）。手机安装特来电、国家电网等第三方充电App作为备用。电量低于15%立即导航至最近超充站，不要冒险。每次出发前确认下一充电站位置。</p>
+    </div>
+    <div class="safety-card">
+      <h4>行程应急预案</h4>
+      <p>D17-D18为机动备用日，可补充前面任意延误。每天出发前查看沿途天气预警。港澳游玩时车辆停在口岸停车场（深圳福田/珠海拱北），贵重物品随身携带。保存各地特斯拉道路救援电话。</p>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== Section 8: Checklist ===== -->
+<section id="checklist"><div class="container">
+  <h2 class="section-title">准备清单</h2>
+  <p class="section-desc">出发前逐项核对，确保万无一失</p>
+
+  <div class="accordion">
+    <!-- Accordion 1 -->
+    <div class="acc-item">
+      <input type="checkbox" id="acc1" class="acc-check">
+      <label class="acc-head" for="acc1">证件与车辆<span class="arrow">▼</span></label>
+      <div class="acc-body"><div class="acc-body-inner">
+        <ul class="checklist">
+          <li>身份证（原件+复印件）</li><li>驾驶证、行驶证</li><li>港澳通行证及有效签注</li>
+          <li>车辆保险单（电子版即可）</li><li>ETC安装并确保余额充足</li>
+          <li>特斯拉手机钥匙已配对</li><li>随车充电线（220V家用插座用）</li>
+          <li>轮胎胎压检查（2.9bar）</li><li>雨刮器检查更换</li>
+          <li>车辆保养记录确认（出发前做一次检查）</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- Accordion 2 -->
+    <div class="acc-item">
+      <input type="checkbox" id="acc2" class="acc-check">
+      <label class="acc-head" for="acc2">露营与生活<span class="arrow">▼</span></label>
+      <div class="acc-body"><div class="acc-body-inner">
+        <ul class="checklist">
+          <li>车载充气床垫（焕新版Model Y专用）</li><li>遮阳挡/隐私帘（全车套）</li>
+          <li>薄睡袋或空调毯</li><li>拖鞋、毛巾、洗漱包</li><li>防晒霜、墨镜、遮阳帽</li>
+          <li>舒适驾驶鞋</li><li>换洗衣物（速干T恤为主）</li><li>雨伞/轻便雨衣</li>
+          <li>手机充电宝+数据线</li><li>少量现金（港澳部分小店用）</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- Accordion 3 -->
+    <div class="acc-item">
+      <input type="checkbox" id="acc3" class="acc-check">
+      <label class="acc-head" for="acc3">应急与港澳<span class="arrow">▼</span></label>
+      <div class="acc-body"><div class="acc-body-inner">
+        <ul class="checklist">
+          <li>常用药品（感冒药、肠胃药、创可贴、晕车药）</li><li>防蚊液（6月南方蚊虫多）</li>
+          <li>急救包</li><li>手电筒/头灯</li><li>八达通卡（香港）/ 澳门通</li>
+          <li>香港/澳门离线地图下载</li><li>口岸停车场位置提前标记</li>
+          <li>车载手机支架</li><li>便携充电宝2个以上</li><li>紧急联系人信息卡片</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <!-- Accordion 4 -->
+    <div class="acc-item">
+      <input type="checkbox" id="acc4" class="acc-check">
+      <label class="acc-head" for="acc4">倒计时清单<span class="arrow">▼</span></label>
+      <div class="acc-body"><div class="acc-body-inner">
+        <ul class="checklist">
+          <li><strong>出发前30天：</strong>确认港澳通行证签注有效（至少还剩一次香港+一次澳门）</li>
+          <li><strong>出发前14天：</strong>车辆保养检查（轮胎、刹车、空调、12V电池）</li>
+          <li><strong>出发前7天：</strong>预订厦门/南京酒店，购买露营装备</li>
+          <li><strong>出发前3天：</strong>ETC充值、充电App下载注册、离线地图下载</li>
+          <li><strong>出发前1天：</strong>充满电、胎压调至2.9bar、行李装车、路线最终确认</li>
+          <li><strong>出发当天：</strong>早上7点出发，避开早高峰，第一段西安→武汉</li>
+        </ul>
+      </div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="endline">愿你历尽山海，归来仍是少年。</div>
+  <p>18天毕业旅行计划 · 2026年6月 · 焕新版Model Y标续</p>
+  <p style="margin-top:6px; opacity:0.6;">生成日期：2026年5月24日</p>
+</footer>
+
+</body>
+</html>
